@@ -44,7 +44,7 @@ class ModeloController extends Controller
     public function store(Request $request)
     {
 
-        dd($request->file());
+        // dd($request->file());
         $request->validate($this->modelo->rules());
 
         $imagem = $request->file('imagem');
@@ -73,7 +73,7 @@ class ModeloController extends Controller
      */
     public function show($id)
     {
-        $modelo = $this->modelo->find($id);
+        $modelo = $this->modelo->with('marca')->find($id);
         if ($modelo === null) {
             return response()->json(['erro' => 'Recurso pesquisado não existe'], 404);
         }

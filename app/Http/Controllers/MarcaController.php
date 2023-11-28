@@ -59,7 +59,8 @@ class MarcaController extends Controller
      */
     public function show($id)
     {
-        $marca = $this->marca->find($id);
+        $marca = $this->marca->with('modelos')->find($id);
+
         if (is_null($marca)) {
             return response()->json(['erro' => 'O recurso não foi encontrado'], 404);
         }

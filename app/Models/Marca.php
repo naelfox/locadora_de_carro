@@ -28,4 +28,8 @@ class Marca extends Model
             'imagem.file' => 'O campo :attribute deve ser um arquivo'
         ];
     }
+
+    public function modelos(){
+        return $this->hasMany(Modelo::class);
+    }
 }
