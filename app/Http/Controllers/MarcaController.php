@@ -35,7 +35,7 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
         $nome =  $request->input('nome');
         $request->validate($this->marca->rules(), $this->marca->feedback($nome));
 
@@ -48,7 +48,7 @@ class MarcaController extends Controller
             'nome' => $request->nome,
             'imagem' => $imagemUrn
         ]);
-        return  response()->json($marca, 201);
+        return response()->json($marca, 201);
     }
 
     /**
@@ -132,16 +132,14 @@ class MarcaController extends Controller
     public function destroy($id)
     {
         $marca = $this->marca->find($id);
+
+
         if (is_null($marca)) {
+
             return response()->json(
-                [
-                    'erro' => 'Não foi possível excluir o recurso não foi encontrado'
-                ],
-                404
+                [ 'erro' => 'Não foi possível excluir o recurso não foi encontrado' ], 404
             );
         }
-
-
 
         Storage::disk('public')->delete($marca->imagem);
 
